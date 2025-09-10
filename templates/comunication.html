@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div>
+    <label for="size">Size:</label>
+    <select name="RetailPriceUnit">
+       
+        <option value="{{ s }}">{{ s }}</option>
+        
+    </select>
+</div><br><br> -->
+    <form action="{{ url_for('helpfilter') }}" method= "POST">
+         
+        <label for="form" >Fruit:</label>
+        <select name="Fruit_x">
+            {% for f in Fruit %}
+            <option value="{{ f }}">{{ f }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="form">RetailPriceUnit:</label>
+        <select name="RetailPriceUnit_y">
+        {% for s in RetailPriceUnit %}
+        <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+        </select>
+        
+        <label for="form">Form:</label>
+        <select name="Form">
+        {% for f in Form %}
+        <option value="{{ f }}">{{ f }}</option>
+        {% endfor %}
+        </select>
+    
+        <button type="submit">Submit</button>
+    </form>
+    
+    {% if table %}
+        <div class="table-responsive">{{ table | safe }}</div>
+    {% else %}
+        <p>No data available yet.</p>
+    {% endif %}
+</body>
+</html>

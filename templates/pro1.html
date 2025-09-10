@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask & HTML</title>
+</head>
+
+<body class="container mt-4">
+    <!-- <p> dress representation of scraped data</p>-->
+    
+
+    {% if table %}
+    <div class="table-responsive">
+        {{ table | safe }}
+    </div>
+    {% else %}
+
+    {% endif %}
+
+
+    <!-- user interactions using <form>,<input>-->
+        <form action="/predict" method="POST">
+            <h1>Economic Prediction</h1><br><br>
+                    
+            <div>
+                <label for="consumable">Consumable :</label>
+                <select name="Fruit_x">
+                    {% for fruit in Fruit %}
+                    <option value="{{ fruit }}">{{ fruit }}</option>
+                    {% endfor %}
+                </select>
+            </div><br><br>
+           
+
+            <div>
+                <label for="form">Form:</label>
+                <select name="Form">
+                    {% for f in Form %}
+                    <option value="{{ f }}">{{ f }}</option>
+                    {% endfor %}
+                </select>
+            </div><br><br>
+
+            <div>
+                <label for="amount">Amount:</label>
+                <select name="CupEquivalentSize_x">
+                    {% for a in amounts %}
+                    <option value="{{ a }}">{{ a }}</option>
+                    {% endfor %}
+                </select>
+            </div><br><br>
+
+            <div>
+                <label for="size">Size:</label>
+                <select name="RetailPriceUnit_y">
+                    {% for s in sizes %}
+                    <option value="{{ s }}">{{ s }}</option>
+                    {% endfor %}
+                </select>
+            </div><br><br>
+        
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+    <p>Predicted Price: {{ prediction }}</p>
+        {% endif %}
+
+        {% if error_message %}
+        <h3 style="color: red;">{{ error_message }}</h3>
+        {% endif %}
+
+    <!-- visualization using <canvas>-->
+    <canvas id="chart" class="mt-4"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>
